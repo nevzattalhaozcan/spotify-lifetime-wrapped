@@ -1,0 +1,296 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+header {
+  background-color: #1db954;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #222222;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  border-bottom: 2px solid #1db954;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  display: inline-block;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background-color: #1db954;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #14833b;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1db954;
+}
+
+footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Hide the native file input completely */
+input[type="file"] {
+  display: none; /* Completely hides the input */
+}
+
+/* Style the custom label as a button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  background-color: #1db954;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Add hover effect to the custom button */
+.custom-file-upload:hover {
+  background-color: #14833b;
+}
+
+/* Style for the selected file name display */
+#file-chosen {
+  margin-left: 1rem;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.tabs {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.tab-buttons-container {
+  display: flex; /* Use flexbox to display buttons next to each other */
+  justify-content: space-between; /* Ensure buttons are adjacent */
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.75rem;
+  background-color: #1db954;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  margin: 0; /* Remove margin between buttons */
+}
+
+.tab-button:hover {
+  background-color: #14833b;
+}
+
+.tab-button.selected {
+  background-color: #14833b; /* Faded color for selected tab */
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tab-content li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: #333333;
+  border-radius: 5px;
+}
+
+.tab-content li strong {
+  color: #1db954;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.data-table th, .data-table td {
+  border: 1px solid #444;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #1db954;
+  color: #ffffff;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #333333;
+}
+
+.data-table tr:hover {
+  background-color: #444444;
+}
+
+.data-table td {
+  color: #ffffff;
+}
+
+.data-table th, .data-table td {
+  text-align: left;
+}
+
+/* Style the dropdowns */
+select {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+select:focus {
+  outline: none;
+  border-color: #1db954;
+}
+
+/* Style for the summary section */
+#summary p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+/* Style for the detailed data section */
+#detailed-section div {
+  margin-bottom: 1rem;
+}
+
+#detailed-section label {
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  header {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+
+  main {
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+
+  .section {
+    margin-bottom: 1rem;
+  }
+
+  .button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .custom-file-upload {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .tab-buttons-container {
+    flex-direction: column;
+  }
+
+  .tab-button {
+    margin-bottom: 0.5rem;
+  }
+
+  .data-table th, .data-table td {
+    padding: 0.5rem;
+  }
+
+  #file-chosen {
+    display: block;
+    margin-top: 0.5rem;
+  }
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #222222;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
