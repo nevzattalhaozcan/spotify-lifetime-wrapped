@@ -37,9 +37,9 @@ To run this project, you need a modern web browser with JavaScript enabled.
 
 ## Project Structure
 
-- [index.html](http://_vscodecontentref_/1): The main HTML file that contains the structure of the web application.
-- [script.js](http://_vscodecontentref_/2): The JavaScript file that handles the logic for file upload, data analysis, and UI interactions.
-- [styles.css](http://_vscodecontentref_/3): The CSS file that contains the styles for the web application.
+- [index.html](https://github.com/nevzattalhaozcan/spotify-lifetime-wrapped/blob/main/index.html): The main HTML file that contains the structure of the web application.
+- [script.js](https://github.com/nevzattalhaozcan/spotify-lifetime-wrapped/blob/main/script.js): The JavaScript file that handles the logic for file upload, data analysis, and UI interactions.
+- [styles.css](https://github.com/nevzattalhaozcan/spotify-lifetime-wrapped/blob/main/styles.css): The CSS file that contains the styles for the web application.
 
 ## Contributing
 
@@ -47,7 +47,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](http://_vscodecontentref_/4) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/nevzattalhaozcan/spotify-lifetime-wrapped/blob/main/LICENSE) file for details.
 
 ## Acknowledgements
 
