@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const firstRecordInDataElement = document.getElementById('first-record-in-data');
 
   let data = [];
-  let selectedLanguage = 'en'; // Default language
+  let selectedLanguage = 'tr'; // Default language
 
   // Populate year dropdown
   const currentYear = new Date().getFullYear();
