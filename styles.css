@@ -13,12 +13,6 @@ header {
   font-size: 1.5rem;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 main {
   max-width: 800px;
   margin: 2rem auto;
@@ -93,7 +87,6 @@ input[type="file"] {
   cursor: pointer;
   font-size: 1rem;
   text-align: center;
-  cursor: pointer;
 }
 
 /* Add hover effect to the custom button */
@@ -140,10 +133,6 @@ input[type="file"] {
 
 .tab-content {
   display: none;
-}
-
-.tab-content.active {
-  display: block;
 }
 
 .tab-content ul {
@@ -290,20 +279,6 @@ select:focus {
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
   border-radius: 10px;
-  padding: 20px;
-}
-
-.modal-header {
-  border-bottom: none;
-}
-
-.modal-body ol {
-  padding-left: 20px;
-}
-
-.modal-body img {
-  max-width: 100%;
-  height: auto;
 }
 
 .close {
