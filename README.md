@@ -2,6 +2,8 @@
 
 Spotify Lifetime Wrapped is a web application that allows you to analyze your Spotify listening data. You can upload your Spotify data (JSON or ZIP files), analyze it, and explore detailed insights about your listening habits. The application supports both English and Turkish languages.
 
+- Only listening data will be analyzed
+
 ## Features
 
 - Upload multiple JSON or ZIP files containing your Spotify data.
