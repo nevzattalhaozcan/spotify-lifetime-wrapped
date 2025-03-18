@@ -1,57 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#212529">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-status-bar-style" content="black">
     <title data-translate="title">Spotify Lifetime Wrapped</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <header>
-        <div class="header-content">
-            <span data-translate="title">Spotify Lifetime Wrapped</span>
-            <div class="language-switcher">
-                <button id="language-en" class="button">English</button>
-                <button id="language-tr" class="button">Türkçe</button>
+<body class="bg-secondary">
+    <header class="bg-dark text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <span data-translate="title">Spotify Lifetime Wrapped</span>
+                <!-- <div class="btn-group" role="group">
+                    <button id="language-en" class="btn btn-secondary">English</button>
+                    <button id="language-tr" class="btn btn-secondary active">Türkçe</button>
+                </div> -->
             </div>
         </div>
     </header>
-    <main>
-        <div class="section" id="welcome-section">
+    <main class="container my-4">
+        <div class="section bg-secondary text-white p-4 rounded" id="welcome-section">
             <h2 data-translate="welcomeTitle">Welcome to Spotify Lifetime Wrapped</h2>
             <p data-translate="welcomeDescription1">
-                Discover your lifetime music journey with Spotify Lifetime Wrapped. Upload your Spotify data, analyze it, and explore detailed insights about your listening habits.
+                Hi 🙋🏻‍♂️ I'm Talha. With this app, you'll be able to access extensive analytics on the music and podcast data you've been listening to since the day you opened your Spotify account. All you need to do is request this data from Spotify and upload the zip file or the json extension files in the zip here. 
             </p>
             <p data-translate="welcomeDescription2">
-                This tool allows you to upload directly the zip file that Spotify sent you via email or multiple JSON files exported from Spotify, analyze them in one go, and view the results in an organized format. You can also export the analyzed data as TXT or PDF for future reference.
+                For any questions or suggestions, you can reach me at <a href="mailto:onevzattalha@gmail.com" style="color: #1db954;">onevzattalha@gmail.com</a>. Hope you enjoy the app! 🎶
             </p>
             <p data-translate="welcomeDescription3">
                 If you don't know how to get your Spotify data, you can follow the instructions 
                 <span id="open-modal-en" style="color: #1db954; cursor: pointer;">here</span>.
-                <span id="open-modal-tr" style="color: #1db954; cursor: pointer; display: none;">buradaki</span>.
+                <span id="open-modal-tr" style="color: #1db954; cursor: pointer; display: none;">buradaki</span>
             </p>
         </div>
 
-        <div class="section">
+        <div class="section bg-secondary text-white p-4 rounded mt-4">
             <h2 data-translate="uploadTitle">Upload Your Files</h2>
-            <form id="upload-form">
-              <label for="file-upload" class="custom-file-upload button" data-translate="chooseFiles">Choose Files</label>
-              <input type="file" id="file-upload" name="files" multiple accept=".json,.zip" hidden>
-              <span id="file-chosen" data-translate="noFileSelected">No file selected</span>
-              <br>
-              <button type="button" id="analyze-button" class="button" style="display: none;" data-translate="analyzeButton">Analyze Data</button>
-          </form>
-          
-            <div id="loading-indicator" style="display: none;" data-translate="loadingMessage">Analyzing data, please wait...</div>
+            <form id="upload-form" class="form-inline">
+                <label for="file-upload" class="btn btn-dark mb-2 mr-2" data-translate="chooseFiles">Choose Files</label>
+                <input type="file" id="file-upload" name="files" multiple accept=".json,.zip" hidden>
+                <span id="file-chosen" class="mb-2" data-translate="noFileSelected">No file selected</span>
+                <button type="button" id="analyze-button" class="btn btn-dark btn-success mb-2 ml-2" style="display: none;" data-translate="analyzeButton">Analyze Data</button>
+            </form>
+            <div id="loading-indicator" class="mt-3" style="display: none;" data-translate="loadingMessage">Analyzing data, please wait...</div>
         </div>
 
-        <div id="results-section" class="section" style="display: none;">
+        <div id="results-section" class="section bg-secondary text-white p-4 rounded mt-4" style="display: none;">
             <h2 data-translate="resultsTitle">Analysis Results</h2>
 
             <div id="summary">
                 <h3 data-translate="summaryTitle">Summary</h3>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                </div>
                 <p id="first-record"></p>
                 <p id="first-record-in-data"></p>
                 <p id="last-record"></p>
@@ -63,95 +70,177 @@
 
             <div class="tabs">
                 <h3 data-translate="dataTabsTitle">Data Tabs</h3>
-                <div class="tab-buttons-container"> <!-- New container for buttons -->
-                    <button id="tracks-tab" class="tab-button" onclick="showTab('track-section')" data-translate="tracksTab">Tracks</button>
-                    <button id="albums-tab" class="tab-button" onclick="showTab('album-section')" data-translate="albumsTab">Albums</button>
-                    <button id="artists-tab" class="tab-button" onclick="showTab('artist-section')" data-translate="artistsTab">Artists</button>
-                    <button id="podcasts-tab" class="tab-button" onclick="showTab('podcast-section')" data-translate="podcastsTab">Podcasts</button>
-                    <button id="details-tab" class="tab-button" onclick="showTab('detailed-section')" data-translate="detailedTab">Detailed Data</button>
+                <div class="btn-group" role="group" aria-label="Data tabs">
+                    <button type="button" class="btn btn-dark" onclick="showTab('track-section')">
+                        <span data-translate="tracksTab">Tracks</span>
+                    </button>
+                    <button type="button" class="btn btn-dark" onclick="showTab('album-section')">
+                        <span data-translate="albumsTab">Albums</span>
+                    </button>
+                    <button type="button" class="btn btn-dark" onclick="showTab('artist-section')">
+                        <span data-translate="artistsTab">Artists</span>
+                    </button>
+                    <button type="button" class="btn btn-dark" onclick="showTab('podcast-section')">
+                        <span data-translate="podcastsTab">Podcasts</span>
+                    </button>
+                    <button type="button" class="btn btn-dark" onclick="showTab('detailed-section')">
+                        <span data-translate="detailedTab">Detailed Data</span>
+                    </button>
                 </div>
             </div>
 
             <div id="track-section" class="tab-content" style="display: none;">
-                <table id="track-stats" class="data-table"></table>
+                <table id="track-stats" class="table table-striped table-dark mt-3"></table>
+                <div class="share-buttons mt-3 p-3 bg-dark rounded">
+                    <h4 class="mb-3" data-translate="shareTitle">Share Your Top Tracks</h4>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-dark mr-2" 
+                                onclick="shareToX()" 
+                                data-translate="shareX"
+                                data-toggle="tooltip" 
+                                data-placement="top" 
+                                data-title-en="This will download the image for you to add into your X post"
+                                data-title-tr="Görseli X gönderinize ekleyebilmeniz için indirilecektir"
+                                title="This will download the image for you to add into your X post">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x mr-2" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                            <span data-translate="shareX">Share on X</span>
+                        </button>
+                        <button class="btn btn-dark mr-2" onclick="downloadImage()" data-translate="downloadImage">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download mr-2" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                            </svg>
+                            <span data-translate="downloadImage">Download Image</span>
+                        </button>
+                        <button class="btn btn-dark" onclick="exportData('csv')" data-translate="exportCsv">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text mr-2" viewBox="0 0 16 16">
+                                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                            </svg>
+                            <span data-translate="exportCsv">Export as CSV</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div id="album-section" class="tab-content" style="display: none;">
-                <table id="album-stats" class="data-table"></table>
+                <table id="album-stats" class="table table-striped table-dark mt-3"></table>
             </div>
 
             <div id="artist-section" class="tab-content" style="display: none;">
-                <table id="artist-stats" class="data-table"></table>
+                <table id="artist-stats" class="table table-striped table-dark mt-3"></table>
             </div>
 
             <div id="podcast-section" class="tab-content" style="display: none;">
-                <table id="podcast-stats" class="data-table"></table>
+                <table id="podcast-stats" class="table table-striped table-dark mt-3"></table>
             </div>
 
             <div id="detailed-section" class="tab-content" style="display: none;">
                 <h3 data-translate="filterDataTitle">Filter Data</h3>
-                <div>
-                    <label for="data-type" data-translate="dataTypeLabel">Data Type:</label>
-                    <select id="data-type">
-                        <option value="track" data-translate="trackOption">Track</option>
-                        <option value="album" data-translate="albumOption">Album</option>
-                        <option value="artist" data-translate="artistOption">Artist</option>
-                        <option value="podcast" data-translate="podcastOption">Podcast</option>
-                    </select>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="data-type" data-translate="dataTypeLabel">Data Type:</label>
+                        <select id="data-type" class="form-control">
+                            <option value="track" data-translate="trackOption">Track</option>
+                            <option value="album" data-translate="albumOption">Album</option>
+                            <option value="artist" data-translate="artistOption">Artist</option>
+                            <option value="podcast" data-translate="podcastOption">Podcast</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="time-period" data-translate="timePeriodLabel">Time of Day:</label>
+                        <select id="time-period" class="form-control">
+                            <option value="all" data-translate="allOption">All</option>
+                            <option value="morning" data-translate="morningOption">Morning (6 AM - 12 PM)</option>
+                            <option value="afternoon" data-translate="afternoonOption">Afternoon (12 PM - 6 PM)</option>
+                            <option value="evening" data-translate="eveningOption">Evening (6 PM - 12 AM)</option>
+                            <option value="night" data-translate="nightOption">Night (12 AM - 6 AM)</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="month" data-translate="monthLabel">Month:</label>
+                        <select id="month" class="form-control">
+                            <option value="all" data-translate="allOption">All</option>
+                            <option value="1" data-translate="januaryOption">January</option>
+                            <option value="2" data-translate="februaryOption">February</option>
+                            <option value="3" data-translate="marchOption">March</option>
+                            <option value="4" data-translate="aprilOption">April</option>
+                            <option value="5" data-translate="mayOption">May</option>
+                            <option value="6" data-translate="juneOption">June</option>
+                            <option value="7" data-translate="julyOption">July</option>
+                            <option value="8" data-translate="augustOption">August</option>
+                            <option value="9" data-translate="septemberOption">September</option>
+                            <option value="10" data-translate="octoberOption">October</option>
+                            <option value="11" data-translate="novemberOption">November</option>
+                            <option value="12" data-translate="decemberOption">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="year" data-translate="yearLabel">Year:</label>
+                        <select id="year" class="form-control">
+                            <option value="all" data-translate="allOption">All</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <label for="time-period" data-translate="timePeriodLabel">Time of Day:</label>
-                    <select id="time-period">
-                        <option value="all" data-translate="allOption">All</option>
-                        <option value="morning" data-translate="morningOption">Morning (6 AM - 12 PM)</option>
-                        <option value="afternoon" data-translate="afternoonOption">Afternoon (12 PM - 6 PM)</option>
-                        <option value="evening" data-translate="eveningOption">Evening (6 PM - 12 AM)</option>
-                        <option value="night" data-translate="nightOption">Night (12 AM - 6 AM)</option>
-                    </select>
-                    <label for="month" data-translate="monthLabel">Month:</label>
-                    <select id="month">
-                        <option value="all" data-translate="allOption">All</option>
-                        <option value="1" data-translate="januaryOption">January</option>
-                        <option value="2" data-translate="februaryOption">February</option>
-                        <option value="3" data-translate="marchOption">March</option>
-                        <option value="4" data-translate="aprilOption">April</option>
-                        <option value="5" data-translate="mayOption">May</option>
-                        <option value="6" data-translate="juneOption">June</option>
-                        <option value="7" data-translate="julyOption">July</option>
-                        <option value="8" data-translate="augustOption">August</option>
-                        <option value="9" data-translate="septemberOption">September</option>
-                        <option value="10" data-translate="octoberOption">October</option>
-                        <option value="11" data-translate="novemberOption">November</option>
-                        <option value="12" data-translate="decemberOption">December</option>
-                    </select>
-                    <label for="year" data-translate="yearLabel">Year:</label>
-                    <select id="year">
-                        <option value="all" data-translate="allOption">All</option>
-                    </select>
-                </div>
-                <button class="button" id="filter-button" data-translate="filterButton">Filter Data</button>
-                <table id="detailed-stats" class="data-table"></table>
+                <button class="btn btn-dark" id="filter-button" data-translate="filterButton">Filter Data</button>
+                <table id="detailed-stats" class="table table-striped table-dark mt-3"></table>
             </div>
+        </div>
 
-            <div id="export-section" class="details">
-                <button class="button" onclick="exportData('txt')" data-translate="exportTxt">Export as TXT</button>
-                <button class="button" onclick="exportData('pdf')" data-translate="exportPdf">Export as PDF</button>
+        <div id="visualization-section" class="section bg-secondary text-white p-4 rounded mt-4" style="display: none;">
+            <h2 data-translate="visualizationTitle">Visualizations</h2>
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="form-group">
+                        <label for="line-chart-interval" class="text-white" data-translate="selectInterval">Select Interval:</label>
+                        <select id="line-chart-interval" class="form-control">
+                            <option value="monthly" data-translate="monthlyOption">Monthly</option>
+                            <option value="yearly" data-translate="yearlyOption">Yearly</option>
+                        </select>
+                    </div>
+                    <button id="back-to-monthly" class="btn btn-dark mb-2" style="display: none;" data-translate="backToMonthly">Back to Monthly Data</button>
+                    <canvas id="trackLineChart"></canvas>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <canvas id="trackChart"></canvas>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <canvas id="albumChart"></canvas>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <canvas id="artistChart"></canvas>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <canvas id="podcastChart"></canvas>
+                </div>
             </div>
         </div>
     </main>
-    <footer>
+    <footer class="bg-dark text-white text-center py-3">
         <p data-translate="privacyMessage">This is an only client-side application, which means your data is not stored anywhere. When you refresh the page or close the browser, it will be gone.</p>
     </footer>
-    <script src="script.js" defer></script>
+    <!-- Load jQuery first -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Then load Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Then load Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Load other scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Load your script last -->
+    <script src="script.js" defer></script>
 
     <!-- The Modal -->
-    <div id="instructions-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
+    <div id="instructions-modal" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8);">
+      <div class="modal-content" style="background-color: #333; color: white; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 50%;">
+        <span class="close" style="color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
         <h2 data-translate="instructionsTitle">How to Request Your Spotify Data</h2>
         <ol>
-          <li data-translate="step1">Click on the link <a href="https://www.spotify.com/tr-tr/account/privacy/" target="_blank">https://www.spotify.com/tr-tr/account/privacy/</a> to go to the privacy page of Spotify</li>
+          <li data-translate="step1">Click on the link <a href="https://www.spotify.com/tr-tr/account/privacy/" target="_blank" style="color: #1db954;">https://www.spotify.com/tr-tr/account/privacy/</a> to go to the privacy page of Spotify</li>
           <li data-translate="step2">Log in to your account if you're not logged in</li>
           <li data-translate="step3">Scroll down to the "Download your data" section.</li>
           <li data-translate="step4">Click on the "Request" button next to "Request your data".</li>
@@ -159,6 +248,15 @@
           <li data-translate="step6">Download the zip file from the link provided in the email.</li>
         </ol>
         <img src="image.png" alt="instructions image" style="width: 50%; margin-top: 10px;">
+      </div>
+    </div>
+
+    <!-- The Modal for Daily Data -->
+    <div id="daily-data-modal" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8);">
+      <div class="modal-content" style="background-color: #333; color: white; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+        <span class="close" style="color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
+        <h2 id="daily-data-title">Daily Data</h2>
+        <canvas id="dailyLineChart"></canvas>
       </div>
     </div>
 </body>
